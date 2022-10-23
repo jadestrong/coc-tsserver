@@ -6,6 +6,7 @@ import { Range, CompletionItem, CompletionItemKind, InsertTextFormat, Position, 
 import { CompletionItemTag } from 'vscode-languageserver-protocol'
 import * as Proto from '../protocol'
 import * as PConst from '../protocol.const'
+import { asPlainText } from './protocolTranslation'
 
 interface ParamterListParts {
   readonly parts: ReadonlyArray<Proto.SymbolDisplayPart>
@@ -44,6 +45,11 @@ export function convertCompletionEntry(
     sortText = '\uffff' + sortText
   } else {
     sortText = tsEntry.sortText
+  }
+
+  const { sourceDisplay } = tsEntry;
+  if (sourceDisplay) {
+      detail = asPlainText(sourceDisplay);
   }
   let kind = convertKind(tsEntry.kind)
   let insertTextFormat = (

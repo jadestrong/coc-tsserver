@@ -9,9 +9,10 @@ export function inferredProjectConfig(
   config: TypeScriptServiceConfiguration
 ): Proto.ExternalProjectCompilerOptions {
   const base: Proto.ExternalProjectCompilerOptions = {
-    module: 'commonjs' as Proto.ModuleKind,
-    target: 'es2016' as Proto.ScriptTarget,
-    jsx: 'preserve' as Proto.JsxEmit
+    module: 'ESNext' as Proto.ModuleKind,
+	moduleResolution: 'Node' as Proto.ModuleResolutionKind,
+    target: 'ES2020' as Proto.ScriptTarget,
+    jsx: 'react' as Proto.JsxEmit
   }
 
   if (config.checkJs) {
